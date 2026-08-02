@@ -7,7 +7,7 @@
    ТАЙМЕР
 ========================================== */
 
-const concertDate = new Date("September 24, 2026 19:00:00").getTime();
+const concertDate = new Date("September 24, 2026 20:00:00").getTime();
 
 const timer = document.getElementById("timer");
 

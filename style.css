@@ -1331,5 +1331,161 @@ width:55px;
 height:55px;
 
 font-size:24px;
+   
+}
+
+/* ==========================================
+   ЗОЛОТЫЕ РАЗДЕЛИТЕЛИ
+========================================== */
+
+.section{
+    position: relative;
+}
+
+.section::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:180px;
+    height:1px;
+    background:linear-gradient(
+        to right,
+        transparent,
+        rgba(201,164,92,.9),
+        transparent
+    );
+}
+
+.section:last-of-type::after{
+    display:none;
+}
+
+/* ==========================================
+   ЗОЛОТОЕ СВЕЧЕНИЕ
+========================================== */
+
+body{
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(201,164,92,.08),
+    transparent 35%),
+
+    radial-gradient(circle at bottom left,
+    rgba(201,164,92,.05),
+    transparent 40%),
+
+    #111;
 
 }
+
+#about{
+
+background:#161616;
+
+}
+
+#program{
+
+background:#111111;
+
+}
+
+#date{
+
+background:#151515;
+
+}
+
+#location{
+
+background:#111111;
+
+}
+
+#donate{
+
+background:#161616;
+
+}
+
+.ticket-section{
+
+background:#101010;
+
+}
+
+.ticket-btn,
+.main-button,
+.ticket-big{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.ticket-btn::before,
+.main-button::before,
+.ticket-big::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:80%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.25),
+
+transparent);
+
+transition:1s;
+
+}
+
+.ticket-btn:hover::before,
+.main-button:hover::before,
+.ticket-big:hover::before{
+
+left:130%;
+
+}
+
+   html{
+
+scroll-padding-top:90px;
+
+}
+
+::selection{
+
+background:#c9a45c;
+
+color:#111;
+
+}
+
+   
+   
+
+
+   
+
+
+

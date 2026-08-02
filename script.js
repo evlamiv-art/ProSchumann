@@ -377,6 +377,55 @@ upButton.classList.add("visible");
 
 }
 
+   /* ==========================================
+   ЯНДЕКС КАРТА
+========================================== */
+
+ymaps.ready(initMap);
+
+function initMap(){
+
+    const map = new ymaps.Map("map",{
+
+        center:[59.933036,30.326181],
+
+        zoom:17,
+
+        controls:["zoomControl","fullscreenControl"]
+
+    });
+
+    const placemark = new ymaps.Placemark(
+
+        [59.933036,30.326181],
+
+        {
+
+            balloonContent:`
+            <strong>ProSchumann</strong><br>
+            Концертный зал «Арте-Фактум»<br>
+            Санкт-Петербург<br>
+            Набережная канала Грибоедова, 26
+            `,
+
+            hintContent:"Концерт ProSchumann"
+
+        },
+
+        {
+
+            preset:"islands#darkOrangeIcon"
+
+        }
+
+    );
+
+    map.geoObjects.add(placemark);
+
+    map.behaviors.disable("scrollZoom");
+
+}
+
 else{
 
 upButton.classList.remove("visible");

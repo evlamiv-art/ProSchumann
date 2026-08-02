@@ -294,33 +294,43 @@ HERO
 
 .section h2{
 
-    font-family:'Cormorant Garamond',serif;
+font-family:'Cormorant Garamond',serif;
 
-    font-size:64px;
+font-size:64px;
 
-    text-align:center;
+font-weight:600;
 
-    margin-bottom:50px;
+letter-spacing:2px;
 
-    color:#f2e4c4;
+text-align:center;
 
-    position:relative;
+margin-bottom:50px;
+
+color:#f5e6c4;
+
+text-shadow:
+
+0 0 25px rgba(201,164,92,.08);
 
 }
 
 .section h2::after{
 
-    content:"";
+content:"";
 
-    display:block;
+display:block;
 
-    width:90px;
+width:110px;
 
-    height:2px;
+height:2px;
 
-    background:#c9a45c;
+margin:20px auto 0;
 
-    margin:20px auto 0;
+background:linear-gradient(
+to right,
+transparent,
+#c9a45c,
+transparent);
 
 }
 

@@ -3,75 +3,80 @@
    script.js
 ========================================== */
 
+"use strict";
+
 /* ==========================================
    ТАЙМЕР
 ========================================== */
 
-const concertDate = new Date("September 24, 2026 20:00:00").getTime();
-
+const concertDate = new Date("2026-09-24T20:00:00");
 const timer = document.getElementById("timer");
 
 function updateTimer() {
 
-    const now = new Date().getTime();
+    if (!timer) return;
+
+    const now = new Date();
 
     const distance = concertDate - now;
 
     if (distance <= 0) {
 
-        timer.innerHTML = "Концерт начался";
+        timer.innerHTML = `
+            <div class="timer-box">
+                <div class="number">00</div>
+                <div class="text">Концерт начался</div>
+            </div>
+        `;
 
         return;
-
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
     const hours = Math.floor(
-
-        (distance % (1000 * 60 * 60 * 24))
-
-        /
-
+        (distance % (1000 * 60 * 60 * 24)) /
         (1000 * 60 * 60)
-
     );
 
     const minutes = Math.floor(
-
-        (distance % (1000 * 60 * 60))
-
-        /
-
+        (distance % (1000 * 60 * 60)) /
         (1000 * 60)
-
     );
 
     const seconds = Math.floor(
-
-        (distance % (1000 * 60))
-
-        /
-
+        (distance % (1000 * 60)) /
         1000
-
     );
 
-    timer.innerHTML =
+    timer.innerHTML = `
 
-        `<div>${days}<span>дней</span></div>
+        <div class="timer-box">
+            <div class="number">${days}</div>
+            <div class="text">Дней</div>
+        </div>
 
-         <div>${hours}<span>часов</span></div>
+        <div class="timer-box">
+            <div class="number">${String(hours).padStart(2,"0")}</div>
+            <div class="text">Часов</div>
+        </div>
 
-         <div>${minutes}<span>минут</span></div>
+        <div class="timer-box">
+            <div class="number">${String(minutes).padStart(2,"0")}</div>
+            <div class="text">Минут</div>
+        </div>
 
-         <div>${seconds}<span>секунд</span></div>`;
+        <div class="timer-box">
+            <div class="number">${String(seconds).padStart(2,"0")}</div>
+            <div class="text">Секунд</div>
+        </div>
 
+    `;
 }
 
 updateTimer();
-
 setInterval(updateTimer,1000);
+
 
 /* ==========================================
    ПЛАВНОЕ ПОЯВЛЕНИЕ БЛОКОВ
@@ -79,15 +84,15 @@ setInterval(updateTimer,1000);
 
 const sections = document.querySelectorAll("section");
 
-sections.forEach(section=>{
+sections.forEach(section => {
 
     section.classList.add("hidden");
 
 });
 
-const observer = new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
         if(entry.isIntersecting){
 
@@ -98,26 +103,29 @@ const observer = new IntersectionObserver(entries=>{
     });
 
 },{
-    threshold:.15
+    threshold:0.15
 });
 
-sections.forEach(section=>{
+sections.forEach(section => {
 
     observer.observe(section);
 
 });
 
+
 /* ==========================================
    ПЛАВНАЯ ПРОКРУТКА
 ========================================== */
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-    anchor.addEventListener("click",function(e){
+    anchor.addEventListener("click", function(e){
 
         e.preventDefault();
 
-        const target=document.querySelector(this.getAttribute("href"));
+        const target = document.querySelector(
+            this.getAttribute("href")
+        );
 
         if(target){
 
@@ -133,315 +141,244 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
 });
 
-/* ==========================================
-   КРАСИВЫЙ ТАЙМЕР
-========================================== */
-
-function updateTimer() {
-
-    const now = new Date().getTime();
-
-    const distance = concertDate - now;
-
-    if (distance <= 0) {
-
-        timer.innerHTML = "<h2>Концерт уже начался!</h2>";
-
-        return;
-
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    timer.innerHTML = `
-
-    <div class="timer-box">
-        <div class="number">${days}</div>
-        <div class="text">Дней</div>
-    </div>
-
-    <div class="timer-box">
-        <div class="number">${hours}</div>
-        <div class="text">Часов</div>
-    </div>
-
-    <div class="timer-box">
-        <div class="number">${minutes}</div>
-        <div class="text">Минут</div>
-    </div>
-
-    <div class="timer-box">
-        <div class="number">${seconds}</div>
-        <div class="text">Секунд</div>
-    </div>
-
-    `;
-
-}
-
-updateTimer();
-
-setInterval(updateTimer,1000);
-
 
 /* ==========================================
-      КАРУСЕЛЬ ФОТОГРАФИЙ
+   КАРУСЕЛЬ
 ========================================== */
 
 const photos = [
 
-"img/photo1.jpg",
-
-"img/photo2.jpg",
-
-"img/photo3.jpg",
-
-"img/photo4.jpg",
-
-"img/photo5.jpg"
+    "img/photo1.jpg",
+    "img/photo2.jpg",
+    "img/photo3.jpg",
+    "img/photo4.jpg",
+    "img/photo5.jpg"
 
 ];
 
 const captions = [
 
-"Главный вход",
-
-"Пройдите через арку",
-
-"Поверните направо",
-
-"Поднимитесь по лестнице",
-
-"Вход в концертный зал"
+    "Главный вход",
+    "Пройдите через арку",
+    "Поверните направо",
+    "Поднимитесь по лестнице",
+    "Вход в концертный зал"
 
 ];
 
-let currentSlide = 0;
-
 const slide = document.getElementById("slide");
 
-const caption = document.createElement("p");
+let currentSlide = 0;
 
-caption.className = "slide-caption";
+if(slide){
 
-document.querySelector(".slider").appendChild(caption);
+    const slider = document.querySelector(".slider");
 
-function showSlide(index){
+    const caption = document.createElement("p");
 
-    slide.style.opacity = 0;
+    caption.className = "slide-caption";
 
-    setTimeout(()=>{
+    slider.appendChild(caption);
 
-        slide.src = photos[index];
+    function showSlide(index){
 
-        caption.textContent = captions[index];
+        slide.style.opacity = 0;
 
-        slide.style.opacity = 1;
+        setTimeout(()=>{
 
-    },250);
+            slide.src = photos[index];
 
+            caption.textContent = captions[index];
+
+            slide.style.opacity = 1;
+
+        },250);
+
+    }
+
+    showSlide(currentSlide);
+
+    const next = document.querySelector(".next");
+    const prev = document.querySelector(".prev");
+
+    next.addEventListener("click",()=>{
+
+        currentSlide++;
+
+        if(currentSlide >= photos.length){
+
+            currentSlide = 0;
+
+        }
+
+        showSlide(currentSlide);
+
+    });
+
+    prev.addEventListener("click",()=>{
+
+        currentSlide--;
+
+        if(currentSlide < 0){
+
+            currentSlide = photos.length - 1;
+
+        }
+
+        showSlide(currentSlide);
+
+    });
+
+    setInterval(()=>{
+
+        currentSlide++;
+
+        if(currentSlide >= photos.length){
+
+            currentSlide = 0;
+
+        }
+
+        showSlide(currentSlide);
 }
 
-showSlide(currentSlide);
-
-
-/* кнопка вперед */
-
-document.querySelector(".next").addEventListener("click",()=>{
-
-    currentSlide++;
-
-    if(currentSlide>=photos.length){
-
-        currentSlide=0;
-
-    }
-
-    showSlide(currentSlide);
-
-});
-
-
-/* кнопка назад */
-
-document.querySelector(".prev").addEventListener("click",()=>{
-
-    currentSlide--;
-
-    if(currentSlide<0){
-
-        currentSlide=photos.length-1;
-
-    }
-
-    showSlide(currentSlide);
-
-});
-
-
-/* автопрокрутка */
-
-setInterval(()=>{
-
-    currentSlide++;
-
-    if(currentSlide>=photos.length){
-
-        currentSlide=0;
-
-    }
-
-    showSlide(currentSlide);
-
-},6000);
-
-
-
 /* ==========================================
-      СВАЙП НА ТЕЛЕФОНЕ
+   СВАЙП НА ТЕЛЕФОНЕ
 ========================================== */
+
+if (slide) {
 
 let startX = 0;
 
-slide.addEventListener("touchstart",(e)=>{
+slide.addEventListener(...);
 
-startX = e.touches[0].clientX;
+// ...
+
+}
 
 });
 
 slide.addEventListener("touchend",(e)=>{
 
-let endX = e.changedTouches[0].clientX;
+    let endX = e.changedTouches[0].clientX;
 
-if(endX-startX>70){
+    if(endX - startX > 70){
 
-document.querySelector(".prev").click();
+        document.querySelector(".prev").click();
 
-}
+    }
 
-if(startX-endX>70){
+    if(startX - endX > 70){
 
-document.querySelector(".next").click();
+        document.querySelector(".next").click();
 
-}
+    }
 
 });
 
 
 /* ==========================================
-      ПЛАВНОЕ ПОЯВЛЕНИЕ HEADER
+   ИЗМЕНЕНИЕ ШАПКИ ПРИ ПРОКРУТКЕ
 ========================================== */
 
 const header = document.querySelector("header");
 
 window.addEventListener("scroll",()=>{
 
-if(window.scrollY>80){
+    if(!header) return;
 
-header.style.background="rgba(10,10,10,.92)";
+    if(window.scrollY > 80){
 
-}
+        header.style.background = "rgba(10,10,10,.92)";
+        header.style.backdropFilter = "blur(15px)";
 
-else{
+    }else{
 
-header.style.background="rgba(15,15,15,.55)";
+        header.style.background = "rgba(15,15,15,.55)";
+        header.style.backdropFilter = "blur(10px)";
 
-}
+    }
 
 });
 
 
 /* ==========================================
-      КНОПКА НАВЕРХ
+   КНОПКА "НАВЕРХ"
 ========================================== */
 
 const upButton = document.createElement("div");
 
-upButton.innerHTML="↑";
+upButton.className = "scrollTop";
 
-upButton.className="scrollTop";
+upButton.innerHTML = "↑";
 
 document.body.appendChild(upButton);
 
 window.addEventListener("scroll",()=>{
 
-if(window.scrollY>700){
+    if(window.scrollY > 700){
 
-upButton.classList.add("visible");
+        upButton.classList.add("visible");
 
-}
+    }else{
 
-   /* ==========================================
-   ЯНДЕКС КАРТА
-========================================== */
+        upButton.classList.remove("visible");
 
-ymaps.ready(initMap);
+    }
 
-function initMap(){
+});
 
-    const map = new ymaps.Map("map",{
+upButton.addEventListener("click",()=>{
 
-        center:[59.933036,30.326181],
+    window.scrollTo({
 
-        zoom:17,
+        top:0,
 
-        controls:["zoomControl","fullscreenControl"]
+        behavior:"smooth"
 
     });
 
-    const placemark = new ymaps.Placemark(
+});
 
-        [59.933036,30.326181],
 
-        {
+/* ==========================================
+   ПОДСВЕТКА АКТИВНОГО ПУНКТА МЕНЮ
+========================================== */
 
-            balloonContent:`
-            <strong>ProSchumann</strong><br>
-            Концертный зал «Арте-Фактум»<br>
-            Санкт-Петербург<br>
-            Набережная канала Грибоедова, 26
-            `,
+const navLinks = document.querySelectorAll("nav a");
 
-            hintContent:"Концерт ProSchumann"
+window.addEventListener("scroll",()=>{
 
-        },
+    let current = "";
 
-        {
+    sections.forEach(section=>{
 
-            preset:"islands#darkOrangeIcon"
+        const sectionTop = section.offsetTop - 150;
+
+        if(window.scrollY >= sectionTop){
+
+            current = section.getAttribute("id");
 
         }
 
-    );
+    });
 
-    map.geoObjects.add(placemark);
+    navLinks.forEach(link=>{
 
-    map.behaviors.disable("scrollZoom");
+        link.classList.remove("active");
 
-}
+        if(link.getAttribute("href") === "#" + current){
 
-else{
+            link.classList.add("active");
 
-upButton.classList.remove("visible");
+        }
 
-}
-
-});
-
-upButton.onclick=()=>{
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
+    });
 
 });
 
-};
+
+
+       
+
+    },6000);

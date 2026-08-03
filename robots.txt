@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://evlamiv-art.github.io/ProSchumann/sitemap.xml

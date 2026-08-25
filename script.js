@@ -194,100 +194,35 @@ setInterval(updateTimer,1000);
       КАРУСЕЛЬ ФОТОГРАФИЙ
 ========================================== */
 
-const photos = [
+const sliderImages = document.querySelector('.slider-images');
+const slides = document.querySelectorAll('.slide-item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-"img/IMG_2390.jpg",
+let currentIndex = 0;
 
-"img/IMG_2398.jpg",
-
-"img/IMG_2400.jpg",
-
-"img/IMG_2428.jpg",
-
-"img/IMG_2432.jpg",
-
-"img/IMG_2446.jpg"
-
-];
-
-const captions = [
-
-"Главный вход",
-
-"Пройдите через арку",
-
-"Справа лестница, поднимитесь по ней и позвоните в домофон",
-   
-"идите вверх по лестнице",
-   
-"И поворачивайте направо в коридор",
-   
-"Вход в концертный зал"
-
-];
-
-let currentSlide = 0;
-
-const slide = document.getElementById("slide");
-
-const caption = document.createElement("p");
-
-caption.className = "slide-caption";
-
-document.querySelector(".slider").appendChild(caption);
-
-function showSlide(index){
-
-    slide.style.opacity = 0;
-
-    setTimeout(()=>{
-
-        slide.src = photos[index];
-
-        caption.textContent = captions[index];
-
-        slide.style.opacity = 1;
-
-    },250);
-
+function updateSlider() {
+  const offset = -currentIndex * 100;
+  sliderImages.style.transform = `translateX(${offset}%)`;
 }
 
-showSlide(currentSlide);
-
-
-/* кнопка вперед */
-
-document.querySelector(".next").addEventListener("click",()=>{
-
-    currentSlide++;
-
-    if(currentSlide>=photos.length){
-
-        currentSlide=0;
-
-    }
-
-    showSlide(currentSlide);
-
+prevBtn.addEventListener('click', () => {
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = slides.length - 1;
+  }
+  updateSlider();
 });
 
-
-/* кнопка назад */
-
-document.querySelector(".prev").addEventListener("click",()=>{
-
-    currentSlide--;
-
-    if(currentSlide<0){
-
-        currentSlide=photos.length-1;
-
-    }
-
-    showSlide(currentSlide);
-
+nextBtn.addEventListener('click', () => {
+  currentIndex++;
+  if (currentIndex >= slides.length) {
+    currentIndex = 0;
+  }
+  updateSlider();
 });
 
+updateSlider();
 
 /* автопрокрутка */
 

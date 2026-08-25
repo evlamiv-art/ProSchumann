@@ -196,15 +196,17 @@ setInterval(updateTimer,1000);
 
 const photos = [
 
-"img/photo1.jpg",
+"img/IMG_2390.jpg",
 
-"img/photo2.jpg",
+"img/IMG_2398.jpg",
 
-"img/photo3.jpg",
+"img/IMG_2400.jpg",
 
-"img/photo4.jpg",
+"img/IMG_2428.jpg",
 
-"img/photo5.jpg"
+"img/IMG_2432.jpg",
+
+"img/IMG_2446.jpg"
 
 ];
 
@@ -214,10 +216,12 @@ const captions = [
 
 "Пройдите через арку",
 
-"Поверните направо",
-
-"Поднимитесь по лестнице",
-
+"Справа лестница, поднимитесь по ней и позвоните в домофон",
+   
+"идите вверх по лестнице",
+   
+"И поворачивайте направо в коридор",
+   
 "Вход в концертный зал"
 
 ];

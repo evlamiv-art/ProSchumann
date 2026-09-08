@@ -1547,27 +1547,81 @@ footer,
        КАРУСЕЛЬ
        ========================= */
 
-    .slider {
-        width: 100%;
-        max-width: 100%;
-        flex-direction: column;
-        gap: 15px;
-    }
+  .slider{
 
-    .slider-image {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        box-sizing: border-box;
-    }
+    display:flex;
 
-    .prev,
-    .next {
-        width: 55px;
-        height: 55px;
-        flex-shrink: 0;
-    }
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:40px;
+
+}
+
+.slider-image{
+
+    max-width:900px;
+
+    width:100%;
+
+}
+
+.slider-image img{
+
+    width:100%;
+
+    height:auto;
+
+    border-radius:20px;
+
+    display:block;
+
+    transition:opacity .4s ease;
+
+}
+
+.slide-caption{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:18px;
+
+    color:#d8b16a;
+
+    font-style:italic;
+
+    min-height:30px;
+
+}
+
+.prev,
+.next{
+
+    background:none;
+
+    border:none;
+
+    color:#d8b16a;
+
+    font-size:40px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.prev:hover,
+.next:hover{
+
+    transform:scale(1.15);
+
+}
 
 
     /* =========================

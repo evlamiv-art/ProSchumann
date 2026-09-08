@@ -200,9 +200,9 @@ const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 
 const captions = [
+    "Вход в зал со двора",
     "Пройдите через арку",
     "Справа лестница",
-    "Позвоните в домофон",
     "Поднимайтесь вверх по лестнице",
     "Вход в концертный зал «Арте-Фактум»"
 ];

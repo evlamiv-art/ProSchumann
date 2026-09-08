@@ -199,48 +199,68 @@ const slides = document.querySelectorAll('.slide-item');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 
+const captions = [
+    "Пройдите через арку",
+    "Справа лестница",
+    "Позвоните в домофон",
+    "Поднимайтесь вверх по лестнице",
+    "Вход в концертный зал «Арте-Фактум»"
+];
+
+const captionElement = document.querySelector('.slide-caption');
+
 let currentIndex = 0;
 
 function updateSlider() {
-  const offset = -currentIndex * 100;
-  sliderImages.style.transform = `translateX(${offset}%)`;
+
+    const offset = -currentIndex * 100;
+
+    sliderImages.style.transform = `translateX(${offset}%)`;
+
+    if (captionElement) {
+        captionElement.textContent = captions[currentIndex];
+    }
 }
 
 prevBtn.addEventListener('click', () => {
-  currentIndex--;
-  if (currentIndex < 0) {
-    currentIndex = slides.length - 1;
-  }
-  updateSlider();
+
+    currentIndex--;
+
+    if (currentIndex < 0) {
+        currentIndex = slides.length - 1;
+    }
+
+    updateSlider();
+
 });
 
 nextBtn.addEventListener('click', () => {
-  currentIndex++;
-  if (currentIndex >= slides.length) {
-    currentIndex = 0;
-  }
-  updateSlider();
-});
 
-updateSlider();
+    currentIndex++;
+
+    if (currentIndex >= slides.length) {
+        currentIndex = 0;
+    }
+
+    updateSlider();
+
+});
 
 /* автопрокрутка */
 
-setInterval(()=>{
+setInterval(() => {
 
-    currentSlide++;
+    currentIndex++;
 
-    if(currentSlide>=photos.length){
-
-        currentSlide=0;
-
+    if (currentIndex >= slides.length) {
+        currentIndex = 0;
     }
 
-    showSlide(currentSlide);
+    updateSlider();
 
-},6000);
+}, 6000);
 
-
+updateSlider();
 
 /* ==========================================
       СВАЙП НА ТЕЛЕФОНЕ
